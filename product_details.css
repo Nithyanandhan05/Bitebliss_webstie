@@ -1,0 +1,509 @@
+:root {
+  /* Keeping your original color palette */
+  --primary-purple: #975ab7;
+  --secondary-brown: #502325;
+  --light-purple: #b68cd4;
+  --dark-brown: #3a1a1c;
+  --cream: #975ab7;
+  --white: #ffffff;
+  --text-light: #f0e8ff; /* A slightly softer white for text */
+  --text-dark: #2c2c2c;
+  --glow-purple: rgba(151, 90, 183, 0.6);
+  --gradient-primary: linear-gradient(135deg, var(--primary-purple) 0%, var(--light-purple) 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Body & Animated Background --- */
+/* This section creates the purple gradient and animated particle background */
+
+body.product-details-page-body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #2c0b42 0%, #3a1a1c 40%, var(--secondary-brown) 100%);
+  background-attachment: fixed;
+  color: var(--text-light);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bg-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.particle {
+  position: absolute;
+  bottom: -150px;
+  background: var(--cream);
+  border-radius: 50%;
+  animation: float 25s infinite ease-in-out;
+  -webkit-animation: float 25s infinite ease-in-out;
+  box-shadow: 0 0 15px var(--glow-purple);
+  will-change: transform;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.particle:nth-child(1) { left: 10%; width: 8px; height: 8px; animation-delay: 0s; -webkit-animation-delay: 0s; }
+.particle:nth-child(2) { left: 20%; width: 4px; height: 4px; animation-delay: -5s; -webkit-animation-delay: -5s; animation-duration: 35s; -webkit-animation-duration: 35s; }
+.particle:nth-child(3) { left: 35%; width: 10px; height: 10px; animation-delay: -2s; -webkit-animation-delay: -2s; }
+.particle:nth-child(4) { left: 50%; width: 5px; height: 5px; animation-delay: -10s; -webkit-animation-delay: -10s; animation-duration: 30s; -webkit-animation-duration: 30s; }
+.particle:nth-child(5) { left: 65%; width: 7px; height: 7px; animation-delay: -7s; -webkit-animation-delay: -7s; }
+.particle:nth-child(6) { left: 80%; width: 4px; height: 4px; animation-delay: -15s; -webkit-animation-delay: -15s; }
+
+@keyframes float {
+  to {
+    transform: translateY(-120vh);
+    -webkit-transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes float {
+  to {
+    -webkit-transform: translateY(-120vh);
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+/* --- Main Content Layout --- */
+
+.details-container {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 20px;
+  perspective: 1500px;
+  -webkit-perspective: 1500px;
+}
+
+/* --- Main Glassmorphism Container --- */
+/* This is the transparent box you requested */
+
+.product-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+
+  /* The Glass Effect */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* For Safari */
+  
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  will-change: transform;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.product-details-grid:hover {
+  transform: translateY(-10px) rotateX(5deg) scale(1.02);
+  -webkit-transform: translateY(-10px) rotateX(5deg) scale(1.02);
+  box-shadow: 0 40px 70px rgba(0,0,0,0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- Product Image Styling --- */
+
+.product-image-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+  transition: transform 0.5s ease;
+  -webkit-transition: -webkit-transform 0.5s ease;
+  will-change: transform;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.product-image-gallery:hover img {
+  transform: scale(1.08);
+  -webkit-transform: scale(1.08);
+}
+
+/* --- Product Info & Typography --- */
+
+.product-info-and-customization {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: var(--white);
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.product-base-price {
+  font-size: 1.6rem;
+  color: var(--light-purple);
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* --- Form Elements: Frosted Glass Style --- */
+
+.customization-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+}
+
+.form-group label i {
+  color: var(--primary-purple);
+  font-size: 1.2rem;
+}
+
+.radio-group {
+  display: flex;
+  gap: 15px;
+}
+
+.radio-group label {
+  font-weight: 500;
+  flex-grow: 1;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  background: rgba(0,0,0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.radio-group label:hover {
+  background: rgba(0,0,0, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.radio-group input[type="radio"] {
+  display: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Style for the selected radio button - iOS Fallback */
+.radio-group label:has(input:checked),
+.radio-group input[type="radio"]:checked + label,
+.radio-group label.selected {
+  background: var(--gradient-primary);
+  color: var(--white);
+  border-color: var(--light-purple);
+  box-shadow: 0 0 20px var(--glow-purple);
+}
+
+.panel-select,
+.panel-input,
+.panel-textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0,0,0, 0.2);
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.panel-select:focus,
+.panel-input:focus,
+.panel-textarea:focus {
+  outline: none;
+  border-color: var(--light-purple);
+  background: rgba(0,0,0, 0.3);
+  box-shadow: 0 0 15px var(--glow-purple);
+}
+
+.panel-input {
+  max-width: 150px;
+}
+
+.panel-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Placeholder styling for iOS */
+.panel-select::-webkit-input-placeholder,
+.panel-input::-webkit-input-placeholder,
+.panel-textarea::-webkit-input-placeholder {
+  color: rgba(240, 232, 255, 0.5);
+  opacity: 1;
+}
+
+.panel-select::placeholder,
+.panel-input::placeholder,
+.panel-textarea::placeholder {
+  color: rgba(240, 232, 255, 0.5);
+  opacity: 1;
+}
+
+/* =================================================================== */
+/* == STYLES FOR THE CUSTOM DROPDOWN OPTIONS BOX == */
+/* =================================================================== */
+
+.custom-select-wrapper {
+  position: relative;
+}
+
+/* Hide the original select box completely */
+.custom-select-wrapper .panel-select {
+  display: none;
+}
+
+/* This is the new, visible "fake" select box */
+.select-styled {
+  position: relative;
+  width: 100%;
+  padding: 14px;
+  padding-right: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0,0,0, 0.2);
+  color: var(--text-light);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Add the arrow to the new box */
+.select-styled::after {
+  content: "";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--text-light);
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+/* Rotate arrow when open */
+.select-styled.active::after {
+  transform: translateY(-50%) rotate(180deg);
+  -webkit-transform: translateY(-50%) rotate(180deg);
+}
+
+/* This is the new, visible options container */
+.select-options {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  margin-top: 8px;
+  background: #3a1a1c; /* Dark background */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: 300px;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.select-options.open {
+  display: block; /* Shown with JS */
+}
+
+/* This is a single option in the new list */
+.select-options div {
+  padding: 14px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-transition: background-color 0.2s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover effect for the new options */
+.select-options div:hover,
+.select-options div:active {
+  background-color: var(--primary-purple);
+}
+
+/* Active/Selected option */
+.select-options div.selected {
+  background-color: var(--primary-purple);
+}
+
+/* --- Footer with Price and Button --- */
+
+.form-footer {
+  margin-top: auto;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.price-container span {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  opacity: 0.8;
+}
+
+.price-container strong {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.btn-add-to-cart-details {
+  flex-grow: 1;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 16px 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.btn-add-to-cart-details:hover,
+.btn-add-to-cart-details:active {
+  transform: translateY(-4px);
+  -webkit-transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px var(--glow-purple);
+}
+
+.btn-add-to-cart-details .loading-icon {
+  display: none;
+}
+
+/* --- Responsive Design --- */
+
+@media (max-width: 900px) {
+  .product-details-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .product-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .details-container {
+    margin: 20px auto;
+    padding: 10px;
+  }
+  .product-details-grid {
+    padding: 25px;
+  }
+  .product-title {
+    font-size: 2rem;
+  }
+  .form-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-add-to-cart-details {
+    text-align: center;
+  }
+  .radio-group {
+    flex-direction: column;
+  }
+}
+
+/* iOS Specific Fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS specific styles */
+  
+  body.product-details-page-body {
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  .product-details-grid {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  .select-options {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  /* Force hardware acceleration on iOS */
+  .particle,
+  .product-image-gallery img,
+  .btn-add-to-cart-details {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
